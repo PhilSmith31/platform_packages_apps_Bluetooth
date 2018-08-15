@@ -255,11 +255,9 @@ public class BluetoothOppManager {
             mMimeTypeOfSendingFile = mimeType;
             mIsHandoverInitiated = isHandover;
             Uri uri = Uri.parse(uriString);
-            BluetoothOppSendFileInfo sendFileInfo =
-                BluetoothOppSendFileInfo.generateFileInfo(mContext, uri, mimeType, fromExternal);
-            uri = BluetoothOppUtility.generateUri(uri, sendFileInfo);
-            BluetoothOppUtility.putSendFileInfo(uri, sendFileInfo);
-            mUriOfSendingFile = uri.toString();
+            BluetoothOppUtility.putSendFileInfo(
+                    uri, BluetoothOppSendFileInfo.generateFileInfo(
+                                 mContext, uri, mimeType, fromExternal));
             storeApplicationData();
         }
     }
@@ -272,11 +270,9 @@ public class BluetoothOppManager {
             mUrisOfSendingFiles = new ArrayList<Uri>();
             mIsHandoverInitiated = isHandover;
             for (Uri uri : uris) {
-                BluetoothOppSendFileInfo sendFileInfo =
-                    BluetoothOppSendFileInfo.generateFileInfo(mContext, uri, mimeType, fromExternal);
-                uri = BluetoothOppUtility.generateUri(uri, sendFileInfo);
-                mUrisOfSendingFiles.add(uri);
-                BluetoothOppUtility.putSendFileInfo(uri, sendFileInfo);
+                BluetoothOppUtility.putSendFileInfo(
+                        uri, BluetoothOppSendFileInfo.generateFileInfo(
+                                     mContext, uri, mimeType, fromExternal));
             }
             storeApplicationData();
         }
